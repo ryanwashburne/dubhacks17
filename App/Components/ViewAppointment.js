@@ -7,17 +7,30 @@ import HomeActions from '../Redux/HomeRedux';
 
 // UI
 import MapView from 'react-native-maps';
-import { View } from 'react-native';
+import { View, Modal } from 'react-native';
 import { Content, Container, Title, Header, Left, Body, Right, Text, Button, Icon } from 'native-base';
+import { Item } from 'native-base';
+
+import Offer from './Offer';
 
 class ViewAppointment extends Component {
+	state = {
+		modal: false,
+	};
+
 	render() {
-		const { deleteAppointment, appointment } = this.props;
+		const { deleteAppointment, appointment, offer } = this.props;
         const style = {
             map: {
                 width: '100%',
                 height: 300,
             },
+			item: {
+				padding: 30,
+			},
+			text: {
+				fontSize: 30,
+			},
         };
 
 		return (
@@ -30,7 +43,7 @@ class ViewAppointment extends Component {
 					<Right />
 				</Header>
                 <Content>
-                    <MapView
+                    {/* <MapView
                         style={style.map}
                         showsUserLocation
                         initialRegion={{
@@ -39,18 +52,40 @@ class ViewAppointment extends Component {
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421,
                         }}
-                    />
-                    <View>
-                        <Text>Type - { appointment.type }</Text>
-                        <Text>Time - { appointment.time }</Text>
-                        <Text>Location - { appointment.location }</Text>
-                        <Text>Status - { appointment.status }</Text>
-                    </View>
-                    <View>
-                        <Button onPress={() => deleteAppointment('123')}>
-                            <Text>Cancel Appointment</Text>
-                        </Button>
-                    </View>
+                    /> */}
+					<Modal
+						animationType="slide"
+						transparent={false}
+						visible={this.state.modal}
+						onRequestClose={() => {alert("Modal has been closed.")}}
+					>
+						<Header>
+							<Left />
+							<Body />
+							<Right>
+								<Button transparent onPress={() => this.setState({ modal: false })}>
+									<Icon name="arrow-down" />
+								</Button>
+							</Right>
+						</Header>
+						{ offer &&
+							<Offer />
+						}
+						<View>
+	                        <Button onPress={() => deleteAppointment('123')}>
+	                            <Text>Cancel Appointment</Text>
+	                        </Button>
+	                    </View>
+					</Modal>
+					<View>
+						<Item style={style.item} button onPress={() => this.setState({modal: true})}>
+							{ appointment.status === 'Pending' ? <Icon name="clock" style={{ fontSize: 60, paddingRight: 20 }} />: <Icon name="checkmark" style={{ fontSize: 60, paddingRight: 20 }} />}
+							<Text style={style.text}>{ appointment.type }</Text>
+							<Right>
+								<Icon name={'checkmark'} style={{ fontSize: 60}} />
+							</Right>
+						</Item>
+					</View>
                 </Content>
             </Container>
 		);
@@ -62,7 +97,9 @@ class ViewAppointment extends Component {
 // };
 
 const mapStateToProps = state => {
-	return {};
+	return {
+		offer: state.offer.offer,
+	};
 };
 
 const mapDispatchToProps = dispatch => {

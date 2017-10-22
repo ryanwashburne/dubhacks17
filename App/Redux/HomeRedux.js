@@ -12,6 +12,7 @@ const { Types, Creators } = createActions({
     deleteRequest: ['num'],
     deleteSuccess: null,
     deleteFailure: ['error'],
+    changeStatus: null,
 });
 export const HomeTypes = Types;
 export default Creators;
@@ -42,6 +43,11 @@ export const deleteSuccess = (state) => state.merge({ appointment: null, error: 
 
 export const deleteFailure = (state, { error }) => state.merge({ error, fetching: false });
 
+export const changeStatus = (state) => {
+    const status = state.appointment.status;
+    return state.merge({ appointment: {...state.appointment, status: !status}});
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 export const reducer = createReducer(INITIAL_STATE, {
     [Types.POST_REQUEST]: postRequest,
@@ -53,6 +59,7 @@ export const reducer = createReducer(INITIAL_STATE, {
     [Types.DELETE_REQUEST]: deleteRequest,
     [Types.DELETE_SUCCESS]: deleteSuccess,
     [Types.DELETE_FAILURE]: deleteFailure,
+    [Types.CHANGE_STATUS]: changeStatus,
 });
 
 /* ------------- Selectors ------------- */

@@ -1,16 +1,18 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 
-import WelcomeScreen from '../Containers/WelcomeScreen';
 import HomeScreen from '../Containers/HomeScreen';
+import NewAppointmentScreen from '../Containers/NewAppointmentScreen';
+import AdditionalScreen from '../Containers/AdditionalScreen';
 
 const PrimaryNav = StackNavigator(
 	{
-		WelcomeScreen: { screen: WelcomeScreen },
 		HomeScreen: { screen: HomeScreen },
+		NewAppointmentScreen: { screen: NewAppointmentScreen },
+		AdditionalScreen: { screen: AdditionalScreen },
 	},
 	{
-		initialRouteName: 'WelcomeScreen',
+		initialRouteName: 'HomeScreen',
 		headerMode: 'none',
 	}
 );

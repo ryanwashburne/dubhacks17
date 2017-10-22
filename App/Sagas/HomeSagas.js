@@ -5,7 +5,7 @@ export function * postAppointment (api, action) {
     const { types, other, num } = action;
     const response = yield call(api.postAppointment, types, other);
 
-    yield put(HomeActions.postSuccess({type: [...types], status: 'Pending'}));
+    yield put(HomeActions.postSuccess({type: [...types], status: false}));
 
     // if (response.ok) {
     //     yield put(HomeActions.postSuccess({...types, other: other, status: 'Pending'}));
