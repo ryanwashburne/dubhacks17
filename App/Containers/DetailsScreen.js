@@ -12,9 +12,6 @@ import { Content, Container, Title, Header, Left, Body, Right, Text } from 'nati
 import { Thumbnail, List, ListItem, Icon } from 'native-base';
 import { Footer, FooterTab, Button, Spinner, Item } from 'native-base';
 
-import NewAppointment from '../Components/NewAppointment';
-import ViewAppointment from '../Components/ViewAppointment';
-
 class HomeScreen extends Component {
 	render() {
 		const { onCancel, onConfirm, deleteAppointment, appointment, navigation } = this.props;

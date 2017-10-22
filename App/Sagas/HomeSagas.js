@@ -18,7 +18,7 @@ export function * getAppointment (api, action) {
     const { num } = action;
     const response = yield call(api.getAppointment, num);
 
-    yield put(HomeActions.getSuccess({type: 'test2'}));
+    // yield put(HomeActions.getSuccess({type: 'test2'}));
 
     // if (response.ok) {
     //     yield put(HomeActions.getSuccess({...response.data}));

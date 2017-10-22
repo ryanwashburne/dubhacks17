@@ -20,7 +20,7 @@ export function * getOffers (api, action) {
     const { num } = action;
     const response = yield call(api.getOffers, num);
 
-    yield put(OfferActions.getSuccess({type: 'test2', time: '4pm'}));
+    // yield put(OfferActions.getSuccess({type: 'test2', time: '4pm'}));
 
     // if (response.ok) {
     //     yield put(OfferActions.getSuccess({...response.data}));
