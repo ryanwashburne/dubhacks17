@@ -69,8 +69,10 @@ class AdditionalScreen extends Component {
                                 <Button
                                     transparent
                                     onPress={() => {
-                                        postAppointment(['Cold', 'Nausea'], 'etc');
-                                        navigation.navigate('HomeScreen');
+                                        if (this.state.selected) {
+                                            postAppointment(['Cold', 'Nausea'], 'etc');
+                                            navigation.navigate('HomeScreen');
+                                        }
                                     }}
                                 >
     								<Text style={{color: this.state.selected ? '#3341D1' : 'lightgray'}}>Confirm</Text>
