@@ -5,12 +5,14 @@ const create = (baseURL = 'http://localhost:3000') => {
         baseURL,
     });
 
-    // const login = (email, password) => api.post('/session', { email: email, password: password });
-    // const scan = (code) => api.put(`/ticket/${code}`);
+    const postAppointment = (types, other, num) => api.post('/appointment', { types: types, other: other, num: num});
+    const getAppointment = (num) => api.get(`/appointment?num=${num}`);
+    const deleteAppointment = (num) => api.delete('/appointment', { num: num });
 
     return {
-        // login,
-        // scan,
+        postAppointment,
+        getAppointment,
+        deleteAppointment,
     };
 }
 

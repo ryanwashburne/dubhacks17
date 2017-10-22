@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 
 // Redux
 import { connect } from 'react-redux';
-// import WelcomeActions from '../Redux/WelcomeRedux';
+import HomeActions from '../Redux/HomeRedux';
 
 // UI
 import MapView from 'react-native-maps';
@@ -12,7 +12,7 @@ import { Content, Container, Title, Header, Left, Body, Right, Text, Button, Ico
 
 class ViewAppointment extends Component {
 	render() {
-		const { appointment } = this.props;
+		const { deleteAppointment, appointment } = this.props;
         const style = {
             map: {
                 width: '100%',
@@ -47,10 +47,7 @@ class ViewAppointment extends Component {
                         <Text>Status - { appointment.status }</Text>
                     </View>
                     <View>
-                        <Button>
-                            <Text>Edit Details</Text>
-                        </Button>
-                        <Button>
+                        <Button onPress={() => deleteAppointment('123')}>
                             <Text>Cancel Appointment</Text>
                         </Button>
                     </View>
@@ -70,7 +67,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		// submit: (phone) => dispatch(WelcomeActions.submitPhone(phone)),
+		deleteAppointment: (num) => dispatch(HomeActions.deleteRequest(num)),
 	};
 };
 

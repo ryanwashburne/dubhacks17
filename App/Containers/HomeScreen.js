@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 
 // Redux
 import { connect } from 'react-redux';
-// import WelcomeActions from '../Redux/WelcomeRedux';
+import HomeActions from '../Redux/HomeRedux';
 
 // UI
 import { View } from 'react-native';
@@ -15,36 +15,37 @@ import NewAppointment from '../Components/NewAppointment';
 import ViewAppointment from '../Components/ViewAppointment';
 
 class HomeScreen extends Component {
-	state = {
-		// appointment: {
-        //     type: 'Back Pains',
-		// 	location: '123 ABC St.',
-		// 	time: '4:00pm',
-		// 	status: 'Confirmed',
-        // }
-		appointment: undefined
-	};
+	componentWillMount() {
+		const { getAppointment } = this.props;
+		getAppointment('123');
+	}
 
 	render() {
-		const { navigation } = this.props;
-		return this.state.appointment ?
-			<ViewAppointment appointment={this.state.appointment} /> :
+		const { fetching, appointment, navigation } = this.props;
+		if (fetching) {
+			return <View><Text>Hi</Text></View>;
+		}
+		return appointment ?
+			<ViewAppointment appointment={appointment} /> :
 			<NewAppointment />
 		;
 	}
 }
 
 HomeScreen.propTypes = {
-	// submit: PropTypes.func.isRequired,
+
 };
 
 const mapStateToProps = state => {
-	return {};
+	return {
+		fetching: state.home.fetching,
+		appointment: state.home.appointment,
+	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
-		// submit: (phone) => dispatch(WelcomeActions.submitPhone(phone)),
+		getAppointment: (num) => dispatch(HomeActions.getRequest(num)),
 	};
 };
 

@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 
 // Redux
 import { connect } from 'react-redux';
-// import WelcomeActions from '../Redux/WelcomeRedux';
+import HomeActions from '../Redux/HomeRedux';
 
 // UI
 import { View } from 'react-native';
@@ -18,11 +18,10 @@ class NewAppointment extends Component {
     };
 
 	render() {
-		const { newAppointment, navigation } = this.props;
+		const { postAppointment, navigation } = this.props;
         const style = {
             screen: {
-                flex: 1,
-                flexDirection: 'row',
+
             },
         };
 
@@ -87,7 +86,7 @@ class NewAppointment extends Component {
                         style={{width: '100%'}}
                         full
                         disabled={this.state.selected.length === 0 && this.state.other.length === 0}
-                        onPress={() => newAppointment(this.state.selected, this.state.other)}
+                        onPress={() => postAppointment(this.state.selected, this.state.other)}
                     >
                         <Text>Request Appointment</Text>
                     </Button>
@@ -107,9 +106,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		newAppointment: (selected, other) => {
-            // dispatch(HomeActions.newAppointment(selected, other))
-        },
+		postAppointment: (selected, other) => dispatch(HomeActions.postRequest(selected, other)),
 	};
 };
 
